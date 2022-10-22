@@ -1,12 +1,12 @@
 var express = require('express');
 var app = express();
-var server = require('http').Server(app);
+var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
 var fs = require("fs")
 app.use(express.static("."));
 
-app.get('/', function(req, res){
+app.get('/', function (req, res) {
     res.redirect("index.html")
 })
 server.listen(3000, () => {
@@ -68,3 +68,53 @@ grassEaterArr = []
 predatorArr = []
 bomberArr = []
 spikeArr = []
+
+
+
+function  createObject(){
+    for (var y = 0; y < matrix.length; y++) {
+        for (var x = 0; x < matrix[y].length; x++) {
+            if (matrix[y][x] == 1) {
+                let gr = new Grass(x, y)
+                grassArr.push(gr)
+            } else if (matrix[y][x] == 2) {
+                let grEat = new GrassEater(x, y)
+                grassEaterArr.push(grEat)
+            }
+            else if (matrix[y][x] == 3) {
+                let pr = new Predator(x, y)
+                predatorArr.push(pr)
+            }
+            else if (matrix[y][x] == 4) {
+                let bomb = new Bomber(x, y)
+                bomberArr.push(bomb)
+            }
+            else if (matrix[y][x] == 5) {
+                let sp = new Spike(x, y)
+                spikeArr.push(sp)
+            }
+
+        }
+    }
+}
+
+function game(){
+   
+    for (let i in grassArr) {
+        grassArr[i].mul()
+    }
+    for (let i in grassEaterArr) {
+        grassEaterArr[i].mul()
+        grassEaterArr[i].eat()
+    }
+    for (let i in predatorArr) {
+        predatorArr[i].mul()
+        predatorArr[i].eat()
+    }
+    for (let i in bomberArr) {
+        bomberArr[i].explode()
+    }
+    for (let i in spikeArr) {
+        spikeArr[i].mul()
+    }
+}
