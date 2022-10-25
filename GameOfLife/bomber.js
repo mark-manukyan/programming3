@@ -1,4 +1,7 @@
-class bomber extends LivingCreature {
+let LivingCreature = require("./LivingCreature")
+
+
+module.exports = class bomber extends LivingCreature {
     constructor(x, y) {
         super(x, y, index)
         this.energy = 1;

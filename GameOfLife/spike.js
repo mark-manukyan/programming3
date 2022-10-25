@@ -1,4 +1,7 @@
-class spike extends LivingCreature {
+let LivingCreature = require("./LivingCreature")
+
+
+module.exports = class spike extends LivingCreature {
     constructor(x, y,) {
        super(x, y, index)
         this.multiply = 0;

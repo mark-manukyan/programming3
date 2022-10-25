@@ -69,6 +69,12 @@ predatorArr = []
 bomberArr = []
 spikeArr = []
 
+Grass = require("./grass")
+GrassEater = require("./grasseater")
+Predator = require("./predator")
+Bomber = require("./bomber")
+Spike = require("./spike")
+
 
 
 function  createObject(){
@@ -96,6 +102,7 @@ function  createObject(){
 
         }
     }
+    io.sockets.emit("send matrix", matrix)
 }
 
 function game(){
@@ -117,4 +124,10 @@ function game(){
     for (let i in spikeArr) {
         spikeArr[i].mul()
     }
+
+    io.sockets.emit("send matrix", matrix)
+
 }
+
+
+setInterval(game, 1000)
