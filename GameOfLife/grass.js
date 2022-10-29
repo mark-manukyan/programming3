@@ -1,11 +1,10 @@
 let LivingCreature = require("./LivingCreature")
 
 
- module.exports = class grass extends  LivingCreature {
+ module.exports = class Grass extends LivingCreature {
     constructor(x, y) {
         super(x, y, index);
        
-
     }
 
 
@@ -24,6 +23,22 @@ let LivingCreature = require("./LivingCreature")
             grassArr.push(newGrass);
             this.multiply = 0;
         }
+        if (weath == "winter") {
+            this.energy -= 3;
+            this.multiply -= 3;
+        }
+        if (weath == "spring") {
+            this.energy += 4;
+            this.multiply += 4;
+        }
+        if (weath == "summer") {
+            this.energy += 2;
+            this.multiply += 2;
+        }
+        if (weath == "autumn") {
+            this.energy--;
+            this.multiply--;
+    }
     }
 
 }

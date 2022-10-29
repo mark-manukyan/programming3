@@ -34,5 +34,22 @@ module.exports = class spike extends LivingCreature {
             spikeArr.push(sp);
             this.multiply = 0;
         }
+
+        if (weath == "winter") {
+            this.energy -= 4;
+            this.multiply -= 4;
+        }
+        if (weath == "spring") {
+            this.energy += 2;
+            this.multiply += 2;
+        }
+        if (weath == "summer") {
+            this.energy += 3;
+            this.multiply += 3;
+        }
+        if (weath == "autumn") {
+            this.energy -= 5;
+            this.multiply -=5;
+    }
     }
 }

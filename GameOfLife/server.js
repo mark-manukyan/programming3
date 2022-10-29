@@ -77,7 +77,7 @@ Spike = require("./spike")
 
 
 
-function  createObject(){
+function createObject() {
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
             if (matrix[y][x] == 1) {
@@ -105,8 +105,8 @@ function  createObject(){
     io.sockets.emit("send matrix", matrix)
 }
 
-function game(){
-   
+function game() {
+
     for (let i in grassArr) {
         grassArr[i].mul()
     }
@@ -131,3 +131,122 @@ function game(){
 
 
 setInterval(game, 1000)
+
+function kill() {
+    grassArr = [];
+    grassEaterArr = []
+    predatorArr = []
+    bomberArr = []
+    spikeArr = []
+    for (var y = 0; y < matrix.length; y++) {
+        for (var x = 0; x < matrix[y].length; x++) {
+            matrix[y][x] = 0;
+        }
+    }
+    io.sockets.emit("send matrix", matrix);
+}
+
+function addGrass() {
+    for (var i = 0; i < 7; i++) {
+    var x = Math.floor(Math.random() * matrix[0].length)
+    var y = Math.floor(Math.random() * matrix.length)
+        if (matrix[y][x] == 0) {
+            matrix[y][x] = 1
+            var gr = new Grass(x, y, 1)
+            grassArr.push(gr)
+        }
+    }
+    io.sockets.emit("send matrix", matrix);
+}
+
+function addGrassEater() {
+    for (var i = 0; i < 7; i++) {   
+    var x = Math.floor(Math.random() * matrix[0].length)
+    var y = Math.floor(Math.random() * matrix.length)
+        if (matrix[y][x] == 0) {
+            matrix[y][x] = 2
+            grassEaterArr.push(new GrassEater(x, y, 2))
+        }
+    }
+    io.sockets.emit("send matrix", matrix);
+}
+
+function addPredator() {
+    for (var i = 0; i < 7; i++) {   
+    var x = Math.floor(Math.random() * matrix[0].length)
+    var y = Math.floor(Math.random() * matrix.length)
+        if (matrix[y][x] == 0) {
+            matrix[y][x] = 3
+            predatorArr.push(new Predator(x, y, 3))
+        }
+    }
+    io.sockets.emit("send matrix", matrix);
+}
+
+function addBomber() {
+    for (var i = 0; i < 7; i++) {   
+    var x = Math.floor(Math.random() * matrix[0].length)
+    var y = Math.floor(Math.random() * matrix.length)
+        if (matrix[y][x] == 0) {
+            matrix[y][x] = 4
+            bomberArr.push(new Bomber(x, y, 4))
+        }
+    }
+    io.sockets.emit("send matrix", matrix);
+}
+
+function addSpike() {
+    for (var i = 0; i < 7; i++) {   
+    var x = Math.floor(Math.random() * matrix[0].length)
+    var y = Math.floor(Math.random() * matrix.length)
+        if (matrix[y][x] == 0) {
+            matrix[y][x] = 5
+            spikeArr.push(new Spike(x, y, 5))
+        }
+    }
+    io.sockets.emit("send matrix", matrix);
+}
+
+function weather() {
+    if (weath == "winter") {
+        weath = "spring"
+    }
+    else if (weath == "spring") {
+        weath = "summer"
+    }
+    else if (weath == "summer") {
+        weath = "autumn"
+    }
+    else if (weath == "autumn") {
+        weath = "winter"
+    }
+    io.sockets.emit('weather', weath)
+}
+
+setInterval(weather, 5000);
+
+
+io.on('connection', function (socket) {
+    createObject();
+    socket.on("kill", kill);
+    socket.on("add grass", addGrass);
+    socket.on("add grassEater", addGrassEater);
+    socket.on("add predator", addPredator);
+    socket.on("add bomber", addBomber);
+    socket.on("add spike", addSpike);
+});
+
+
+var statistics = {};
+
+setInterval(function() {
+    statistics.grass = grassArr.length;
+    statistics.grassEater = grassEaterArr.length;
+    statistics.predator = predatorArr.length;
+    statistics.bomber = bomberArr.length;
+    statistics.spike = spikeArr.length;
+    fs.writeFile("statistics.json", JSON.stringify(statistics), function(){
+        console.log("send")
+    })
+},1000)
+

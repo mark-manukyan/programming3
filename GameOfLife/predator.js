@@ -41,6 +41,15 @@ module.exports = class predator extends LivingCreature {
             predatorArr.push(newGrass);
             this.multiply = 0;
         }
+
+        if (weath == "winter") {
+            this.energy -= 4;
+            this.multiply -= 4;
+        }
+        if (weath == "summer") {
+            this.energy += 1;
+            this.multiply += 1;
+        }
     }
 
     move() {

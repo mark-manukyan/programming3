@@ -9,11 +9,11 @@ body{
 }
 
 h1{
-    color: #fff;
-    border-radius: 20px;
-    margin: 40px;
+    color: rgb(241, 175, 137);
+    border-radius: 30px;
+    margin: 45px;
     padding:20px 30px;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(20, 111, 117, 0.623);
     font-family: 'Lucida Sans', Verdana, sans-serif;
 }
 
