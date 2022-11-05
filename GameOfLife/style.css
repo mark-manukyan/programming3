@@ -21,3 +21,22 @@ canvas{
     border-radius: 35px;
     border: 5px solid #6082B6;
 }
+
+.buttons button{
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    background:rgb(189, 83, 22);
+    width: 200px;
+    padding: 15px;
+    text-align: center;
+    color: #fff;
+    border-radius: 20px
+}
+
+.buttons{
+    width: 1500px;
+    display: flex;
+    justify-content: space-between;
+    margin: 25px 0;
+}

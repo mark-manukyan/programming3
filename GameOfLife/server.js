@@ -75,7 +75,7 @@ Predator = require("./predator")
 Bomber = require("./bomber")
 Spike = require("./spike")
 
-
+ weath = "winter"
 
 function createObject() {
     for (var y = 0; y < matrix.length; y++) {

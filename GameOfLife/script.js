@@ -3,9 +3,9 @@ var socket = io()
 
 let side = 20;
 
-
+weath = "winter"
 function setup() {
-    createCanvas(matrix[0].length * side, matrix.length * side);
+    createCanvas(30 * side, 30 * side);
 
 
 }
@@ -31,7 +31,14 @@ function nkarel(matrix) {
                 }
             } else if (obj == 2) {
                 fill("yellow");
-            } else if (obj == 0) {
+            } else if (obj == 3) {
+                fill("red")
+            } else if(obj == 4){
+                fill("black")
+            } else if(obj == 5){
+                fill ("purple")
+            }
+            else if (obj == 0) {
                 fill("grey")
             }
             rect(x * side, y * side, side, side);
